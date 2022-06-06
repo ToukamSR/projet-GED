@@ -1,0 +1,57 @@
+## Stage académique 2021/2022
+
+Thème 1 : Analyse et conception d'un systeme de gestion électronique de documents.
+
+## specifications fonctionnelles :
+
+la gestion electronique encore appellee DMS ( Document management System )  ou EEDM ( Electronic Document management) , est une technique qui permet d'organiser et de gerer des informations sous forme 
+de document electronique au sein d'une entreprise. elle se traduit egalement par un processus de collaboration , de capitalisation et d'echange d'informations.La GED prend en compte en general la
+gestion des documents selon leur cycle de vie. ci-dessous les fonctions remplies par un GED : 
+
+- creation des documents;
+- edition des documents ( supprimer , modifier );
+- sauvegarde des documents ;
+- stocakge/archivage des documents ;
+- indexation des documents ;
+- diffusion des documents ;
+
+
+## Specifications techniques :
+
+Deux cas de figures : 
+
+- Utilisation d'un logiciel dédié :  Analyse , modification et integration du code open source selon le contexte de l'entreprise.
+
+- Developpemnt full stack d'une application pour repondre à la problématique
+
+           *Type d'application : Application web ( independante  du systme d'exploitatation , developper une application desktop peut 
+           prendre plus de temps )
+
+                **langage front-end : Html/css
+
+                **langage back-end : Python ( classer parmi les meilleurs langages pour une application de gestion) ; autre proposition : php
+
+                **framework : Django ( faciliter le developpement web avec python) ; autre proposition : Laravel
+
+	    *Type de base de donnees: Mysql
+
+## Objectifs :
+
+- Dematerialiser et centraliser les documents d'une entreprise au sein d'un meme espace ;
+- rendre ces documents accessible facilement par chacun des employes ;
+- securiser l'acces à ces documents ;
+
+## Atout 
+
+limiter la rencontre physique pour la validation , la consultation ou la recherche d'un document;
+gain de temps ;
+
+
+
+
+## Questions : 
+faire un design de l'interface utilisateur ? 
+déploiement ? hébergement ?local ?
+difference entre le stockage et l'archivage?
+
+
