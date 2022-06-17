@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_gedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="directory">
+    <Key>
+      <PropertyRef Name="idDirectory" />
+    </Key>
+    <Property Name="idDirectory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="Dir_idDirectory" Type="int" />
+    <Property Name="idOwner" Type="int" Nullable="false" />
+    <Property Name="Use_idUser" Type="int" />
+    <Property Name="DirectoryName" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="dateCreationD" Type="date" Nullable="false" />
+    <Property Name="isLockedD" Type="smallint" Nullable="false" />
+    <Property Name="urlD" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="isDeletedD" Type="smallint" Nullable="false" />
+    <Property Name="descriptionD" Type="nvarchar" MaxLength="254" />
+    <Property Name="IsArchiveD" Type="smallint" />
+    <Property Name="ArchiveNameD" Type="nvarchar" MaxLength="254" />
+    <Property Name="ArchiveDateD" Type="date" />
+  </EntityType>
+  <EntityType Name="file">
+    <Key>
+      <PropertyRef Name="idFile" />
+    </Key>
+    <Property Name="idFile" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idDirectory" Type="int" Nullable="false" />
+    <Property Name="Use_idUser" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="dateCreationF" Type="date" Nullable="false" />
+    <Property Name="format" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="isLockedF" Type="smallint" Nullable="false" />
+    <Property Name="urlF" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="isDeletedF" Type="smallint" Nullable="false" />
+    <Property Name="descriptionF" Type="nvarchar" MaxLength="254" />
+    <Property Name="IsArchiveF" Type="smallint" />
+    <Property Name="ArchiveNameF" Type="nvarchar" MaxLength="254" />
+    <Property Name="ArchiveDateF" Type="date" />
+  </EntityType>
+  <EntityType Name="ownerinformation">
+    <Key>
+      <PropertyRef Name="idOwner" />
+    </Key>
+    <Property Name="idOwner" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ownerName" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="interlocutor" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="descriptionO" Type="nvarchar" MaxLength="254" Nullable="false" />
+  </EntityType>
+  <EntityType Name="privilege">
+    <Key>
+      <PropertyRef Name="idPrivilege" />
+    </Key>
+    <Property Name="idPrivilege" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="254" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="surname" Type="nvarchar" MaxLength="254" />
+    <Property Name="email" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="avatarUrl" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="usergroup">
+    <Key>
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="254" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usergroupprivilege">
+    <Key>
+      <PropertyRef Name="idPrivilege" />
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idPrivilege" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="version">
+    <Key>
+      <PropertyRef Name="idVersion" />
+    </Key>
+    <Property Name="idVersion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idFile" Type="int" Nullable="false" />
+    <Property Name="descriptionV" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="dateCreationV" Type="date" Nullable="false" />
+    <Property Name="VersionName" Type="nvarchar" MaxLength="254" Nullable="false" />
+  </EntityType>
+  <Association Name="directory$FK_DIRECTOR_ARCHIVE_USER">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="directory" Type="Self.directory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="directory">
+        <PropertyRef Name="Use_idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="directory$FK_DIRECTOR_ASSOCIATI_DIRECTOR">
+    <End Role="directory" Type="Self.directory" Multiplicity="0..1" />
+    <End Role="directory1" Type="Self.directory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="directory">
+        <PropertyRef Name="idDirectory" />
+      </Principal>
+      <Dependent Role="directory1">
+        <PropertyRef Name="Dir_idDirectory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="directory$FK_DIRECTOR_ASSOCIATI_OWNERINF">
+    <End Role="ownerinformation" Type="Self.ownerinformation" Multiplicity="1" />
+    <End Role="directory" Type="Self.directory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ownerinformation">
+        <PropertyRef Name="idOwner" />
+      </Principal>
+      <Dependent Role="directory">
+        <PropertyRef Name="idOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="directory$FK_DIRECTOR_ASSOCIATI_USER">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="directory" Type="Self.directory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="directory">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="file$FK_FILE_ARCHIVE_USER">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="file" Type="Self.file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="file">
+        <PropertyRef Name="Use_idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="file$FK_FILE_ASSOCIATI_DIRECTOR">
+    <End Role="directory" Type="Self.directory" Multiplicity="1" />
+    <End Role="file" Type="Self.file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="directory">
+        <PropertyRef Name="idDirectory" />
+      </Principal>
+      <Dependent Role="file">
+        <PropertyRef Name="idDirectory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="file$FK_FILE_ASSOCIATI_USER">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="file" Type="Self.file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="file">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_PRIVILEG">
+    <End Role="privilege" Type="Self.privilege" Multiplicity="1" />
+    <End Role="usergroupprivilege" Type="Self.usergroupprivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="privilege">
+        <PropertyRef Name="idPrivilege" />
+      </Principal>
+      <Dependent Role="usergroupprivilege">
+        <PropertyRef Name="idPrivilege" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_USERGROU">
+    <End Role="usergroup" Type="Self.usergroup" Multiplicity="1" />
+    <End Role="usergroupprivilege" Type="Self.usergroupprivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usergroup">
+        <PropertyRef Name="idGroup" />
+      </Principal>
+      <Dependent Role="usergroupprivilege">
+        <PropertyRef Name="idGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user$FK_USER_ASSOCIATI_USERGROU">
+    <End Role="usergroup" Type="Self.usergroup" Multiplicity="1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usergroup">
+        <PropertyRef Name="idGroup" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="idGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="version$FK_VERSION_ASSOCIATI_FILE">
+    <End Role="file" Type="Self.file" Multiplicity="1" />
+    <End Role="version" Type="Self.version" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="idFile" />
+      </Principal>
+      <Dependent Role="version">
+        <PropertyRef Name="idFile" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_gedModelStoreContainer">
+    <EntitySet Name="directory" EntityType="Self.directory" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="file" EntityType="Self.file" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="ownerinformation" EntityType="Self.ownerinformation" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="privilege" EntityType="Self.privilege" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="usergroup" EntityType="Self.usergroup" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="usergroupprivilege" EntityType="Self.usergroupprivilege" Schema="db_ged" store:Type="Tables" />
+    <EntitySet Name="version" EntityType="Self.version" Schema="db_ged" store:Type="Tables" />
+    <AssociationSet Name="directory$FK_DIRECTOR_ARCHIVE_USER" Association="Self.directory$FK_DIRECTOR_ARCHIVE_USER">
+      <End Role="user" EntitySet="user" />
+      <End Role="directory" EntitySet="directory" />
+    </AssociationSet>
+    <AssociationSet Name="directory$FK_DIRECTOR_ASSOCIATI_DIRECTOR" Association="Self.directory$FK_DIRECTOR_ASSOCIATI_DIRECTOR">
+      <End Role="directory" EntitySet="directory" />
+      <End Role="directory1" EntitySet="directory" />
+    </AssociationSet>
+    <AssociationSet Name="directory$FK_DIRECTOR_ASSOCIATI_OWNERINF" Association="Self.directory$FK_DIRECTOR_ASSOCIATI_OWNERINF">
+      <End Role="ownerinformation" EntitySet="ownerinformation" />
+      <End Role="directory" EntitySet="directory" />
+    </AssociationSet>
+    <AssociationSet Name="directory$FK_DIRECTOR_ASSOCIATI_USER" Association="Self.directory$FK_DIRECTOR_ASSOCIATI_USER">
+      <End Role="user" EntitySet="user" />
+      <End Role="directory" EntitySet="directory" />
+    </AssociationSet>
+    <AssociationSet Name="file$FK_FILE_ARCHIVE_USER" Association="Self.file$FK_FILE_ARCHIVE_USER">
+      <End Role="user" EntitySet="user" />
+      <End Role="file" EntitySet="file" />
+    </AssociationSet>
+    <AssociationSet Name="file$FK_FILE_ASSOCIATI_DIRECTOR" Association="Self.file$FK_FILE_ASSOCIATI_DIRECTOR">
+      <End Role="directory" EntitySet="directory" />
+      <End Role="file" EntitySet="file" />
+    </AssociationSet>
+    <AssociationSet Name="file$FK_FILE_ASSOCIATI_USER" Association="Self.file$FK_FILE_ASSOCIATI_USER">
+      <End Role="user" EntitySet="user" />
+      <End Role="file" EntitySet="file" />
+    </AssociationSet>
+    <AssociationSet Name="uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_PRIVILEG" Association="Self.uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_PRIVILEG">
+      <End Role="privilege" EntitySet="privilege" />
+      <End Role="usergroupprivilege" EntitySet="usergroupprivilege" />
+    </AssociationSet>
+    <AssociationSet Name="uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_USERGROU" Association="Self.uergroupprivilege$FK_ASSOCIAT_ASSOCIATI_USERGROU">
+      <End Role="usergroup" EntitySet="usergroup" />
+      <End Role="usergroupprivilege" EntitySet="usergroupprivilege" />
+    </AssociationSet>
+    <AssociationSet Name="user$FK_USER_ASSOCIATI_USERGROU" Association="Self.user$FK_USER_ASSOCIATI_USERGROU">
+      <End Role="usergroup" EntitySet="usergroup" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="version$FK_VERSION_ASSOCIATI_FILE" Association="Self.version$FK_VERSION_ASSOCIATI_FILE">
+      <End Role="file" EntitySet="file" />
+      <End Role="version" EntitySet="version" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

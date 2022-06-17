@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_gedModelStoreContainer" CdmEntityContainer="db_gedEntities">
+    <EntitySetMapping Name="directories">
+      <EntityTypeMapping TypeName="db_gedModel.directory">
+        <MappingFragment StoreEntitySet="directory">
+          <ScalarProperty Name="idDirectory" ColumnName="idDirectory" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="Dir_idDirectory" ColumnName="Dir_idDirectory" />
+          <ScalarProperty Name="idOwner" ColumnName="idOwner" />
+          <ScalarProperty Name="Use_idUser" ColumnName="Use_idUser" />
+          <ScalarProperty Name="DirectoryName" ColumnName="DirectoryName" />
+          <ScalarProperty Name="dateCreationD" ColumnName="dateCreationD" />
+          <ScalarProperty Name="isLockedD" ColumnName="isLockedD" />
+          <ScalarProperty Name="urlD" ColumnName="urlD" />
+          <ScalarProperty Name="isDeletedD" ColumnName="isDeletedD" />
+          <ScalarProperty Name="descriptionD" ColumnName="descriptionD" />
+          <ScalarProperty Name="IsArchiveD" ColumnName="IsArchiveD" />
+          <ScalarProperty Name="ArchiveNameD" ColumnName="ArchiveNameD" />
+          <ScalarProperty Name="ArchiveDateD" ColumnName="ArchiveDateD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="files">
+      <EntityTypeMapping TypeName="db_gedModel.file">
+        <MappingFragment StoreEntitySet="file">
+          <ScalarProperty Name="idFile" ColumnName="idFile" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idDirectory" ColumnName="idDirectory" />
+          <ScalarProperty Name="Use_idUser" ColumnName="Use_idUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="dateCreationF" ColumnName="dateCreationF" />
+          <ScalarProperty Name="format" ColumnName="format" />
+          <ScalarProperty Name="isLockedF" ColumnName="isLockedF" />
+          <ScalarProperty Name="urlF" ColumnName="urlF" />
+          <ScalarProperty Name="isDeletedF" ColumnName="isDeletedF" />
+          <ScalarProperty Name="descriptionF" ColumnName="descriptionF" />
+          <ScalarProperty Name="IsArchiveF" ColumnName="IsArchiveF" />
+          <ScalarProperty Name="ArchiveNameF" ColumnName="ArchiveNameF" />
+          <ScalarProperty Name="ArchiveDateF" ColumnName="ArchiveDateF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ownerinformations">
+      <EntityTypeMapping TypeName="db_gedModel.ownerinformation">
+        <MappingFragment StoreEntitySet="ownerinformation">
+          <ScalarProperty Name="idOwner" ColumnName="idOwner" />
+          <ScalarProperty Name="ownerName" ColumnName="ownerName" />
+          <ScalarProperty Name="interlocutor" ColumnName="interlocutor" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="descriptionO" ColumnName="descriptionO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="privileges">
+      <EntityTypeMapping TypeName="db_gedModel.privilege">
+        <MappingFragment StoreEntitySet="privilege">
+          <ScalarProperty Name="idPrivilege" ColumnName="idPrivilege" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="db_gedModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="avatarUrl" ColumnName="avatarUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usergroups">
+      <EntityTypeMapping TypeName="db_gedModel.usergroup">
+        <MappingFragment StoreEntitySet="usergroup">
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="versions">
+      <EntityTypeMapping TypeName="db_gedModel.version">
+        <MappingFragment StoreEntitySet="version">
+          <ScalarProperty Name="idVersion" ColumnName="idVersion" />
+          <ScalarProperty Name="idFile" ColumnName="idFile" />
+          <ScalarProperty Name="descriptionV" ColumnName="descriptionV" />
+          <ScalarProperty Name="dateCreationV" ColumnName="dateCreationV" />
+          <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="usergroupprivilege" TypeName="db_gedModel.usergroupprivilege" StoreEntitySet="usergroupprivilege">
+      <EndProperty Name="privilege">
+        <ScalarProperty Name="idPrivilege" ColumnName="idPrivilege" />
+      </EndProperty>
+      <EndProperty Name="usergroup">
+        <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

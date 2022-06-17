@@ -9,7 +9,8 @@ namespace Ged_app
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        //"~/Scripts/jquery-{version}.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,11 +21,27 @@ namespace Ged_app
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      //"~/Scripts/bootstrap.js"
+
+                      //"~/Content/vendors/js/vendor.bundle.base.js",
+                      //"~/Content/js/off-canvas.js",
+                      //"~/Content/js/hoverable-collapse.js",
+                      //"~/Content/js/template.js",
+                      //"~/Content/js/settings.js",
+                      //"~/Content/js/todolist.js",
+                      //"~/Content/vendors/progressbar.js/progressbar.min.js",
+                      //"~/Content/vendors/chart.js/Chart.min.js",
+                      //"~/Content/js/dashboard.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      //"~/Content/bootstrap.css",
+                      "~/Content/site.css"
+
+                      //"~/Content/vendors/typicons.font/font/typicons.css",
+                      //"~/Content/vendors/css/vendor.bundle.base.css",
+                      //"~/Content/css/vertical-layout-light/style.css"
+                      ));
         }
     }
 }
