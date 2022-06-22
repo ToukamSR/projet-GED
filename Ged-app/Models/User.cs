@@ -22,7 +22,9 @@ namespace Ged_app.Models
             this.files = new HashSet<file>();
             this.files1 = new HashSet<file>();
         }
-    
+
+
+        
         public int idUser { get; set; }
         public int idGroup { get; set; }
         public string name { get; set; }

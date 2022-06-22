@@ -1,0 +1,252 @@
+﻿@model IEnumerable<Ged_app.Models.user>
+
+@{
+    Layout = Layout;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="main-header">
+            <h4>@ViewBag.Title</h4>
+        </div>
+    </div>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+            New User
+        </button>
+    </p>
+</div>
+<br />
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.password)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.avatarUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usergroup.GroupName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.password)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.avatarUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usergroup.GroupName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idUser }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idUser }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idUser })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<div class="card">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-hover" style="font-family :Georgia, 'Times New Roman', Times, serif">
+                    <thead>
+                        <tr>
+                            <th>
+                                First Name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            @*<th>
+                                    @Html.DisplayNameFor(model => model.avatarUrl)
+                                </th>*@
+                            <th>
+                                Status
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="table-active">
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td class="table-success">
+                                    @Html.DisplayFor(modelItem => item.surname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.password)
+                                    </td>*@
+                                @*<td class="table-warning">
+                                        @Html.DisplayFor(modelItem => item.avatarUrl)
+                                    </td>*@
+                                <td class="table-danger">
+                                    @Html.DisplayFor(modelItem => item.usergroup.GroupName)
+                                </td>
+                                <td class="table-info">
+                                    <i class="ti-pencil" title="Edit" onclick="loadUser(@item.idUser)">
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.idUser }) |*@
+                                    </i>
+                                    <i class="ti-trash">
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.idUser })
+                                    </i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- User Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="margin-t" method="post" enctype="multipart/form-data">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <div class="login-container text-c animated flipInX">
+                        <div>
+                            <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
+                        </div>
+                        <h3 class="text-whitesmoke">Create A User</h3>
+                        <p class="text-whitesmoke">Please write in all these cases.</p>
+                        <div class="container-content">
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <input type="text" id="nameElt" class="form-control" placeholder="Name" required="" name="name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="surnameElt" class="form-control" placeholder="Surname" name="surname">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="emailElt" class="form-control" placeholder="Email" required="" name="email">
+                            </div>
+                            <div class="form-group">
+                                @*<input type="text" class="form-control" placeholder="Status" required="" name="idGroup">*@
+
+                                @Html.DropDownList("idGroup", ViewBag.Status as SelectList, new { @class = "form-control" })
+
+                              
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="pwdElt" class="form-control" placeholder="*****" required="" name="password">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="avatarElt" class="form-control" placeholder="Avatar" name="avatarFile" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function loadUser(id) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '/User/getUser',
+            dataType: "json",
+            method: 'GET',
+            data: { "idUser": id },
+            success: function (response) {
+                console.log(response.idUser);
+                //alert(response.idUser);
+                document.getElementById("nameElt").value = response.name;
+                document.getElementById("surnameElt").value = response.surname;
+                document.getElementById("emailElt").value = response.email;
+                //document.getElementById("nameElt").value = response.name;
+                document.getElementById("pwdElt").value = response.password;
+                document.getElementById("avatarElt").value = response.avatarUrl;
+            }
+        })
+
+        $('#exampleModalLong').modal('toggle');
+    }
+
+    function delEnt() {
+
+        event.preventDefault();
+        $.ajax({
+            url: 'models/delEnt.php',
+            type: 'POST',
+            data: { "idEnt": idDp },
+            success: function (response) {
+                $('#myDelete').modal('toggle');
+                document.getElementById("listent").innerHTML = response;
+            }
+        })
+        idDp = null;
+    }
+
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
+</script>
