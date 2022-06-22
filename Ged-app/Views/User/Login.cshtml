@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Ged_app.Models.user>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    @Styles.Render("~/Content/assets/css/auth.css")
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body class="main-bg">
+    <div class="login-container text-c animated flipInX">
+        <div>
+            <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
+        </div>
+        <h3 class="text-whitesmoke">Sign In </h3>
+        <p class="text-whitesmoke">Welcome In Your Electronic Document Management.</p>
+        <div class="container-content">
+            @*<form class="margin-t">*@
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="*****" required="">
+                    </div>
+                    @*<button type="submit" class="form-button button-l margin-b"> @Html.ActionLink("Log in", "Login", "User")</button>*@
+                    @*<button type="submit" class="form-button button-l margin-b"> <a style="color:aliceblue" href="/Home/Index">Login</a></button>*@
+                    <button type="submit" class="form-button button-l margin-b">Login</button>
+
+                    <a class="text-darkyellow" href="#"><small>Forgot your password?</small></a>
+
+                }
+            @*</form>*@
+            <p class="margin-t text-whitesmoke"><small> SoniaRykiel &copy; 2022</small> </p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>

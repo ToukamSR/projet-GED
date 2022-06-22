@@ -26,6 +26,19 @@ namespace Ged_app.Controllers
             return View();
         }
 
+
+        public ActionResult Logout()
+        {
+            //ViewBag.Status = list;
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            //ViewBag.Status = list;
+            return View();
+        }
+
         [WebMethod]
         public void getUser(int idUser)
         {
@@ -56,22 +69,41 @@ namespace Ged_app.Controllers
         public RedirectResult Index(user newUser, HttpPostedFileBase avatarFile)
         {
 
-            f(Db.users.Any(newUser))
+
+            //if (Db.users.Find(newUser.idUser)==null)
+            if (Db.users.Any(u => u.idUser == newUser.idUser))
             {
-                // UPDATE
+                // UPDATE 
+
+                user editedUser = Db.users.Find(newUser.idUser);
+                if (avatarFile != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
+                    avatarFile.SaveAs(path);
+
+                    newUser.avatarUrl = path;
+                }
+                DbEntityEntry<user> userEntry = Db.Entry(editedUser);
+
+                userEntry.State = System.Data.Entity.EntityState.Modified;
+
+                userEntry.CurrentValues.SetValues(newUser);
 
             }
             else
             {
+
                 //ADD
-                string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
-                avatarFile.SaveAs(path);
+                if (avatarFile != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
+                    avatarFile.SaveAs(path);
+
+                    newUser.avatarUrl = path;
+                }
 
                 newUser.password = cryptDPW(newUser.password);
-                newUser.avatarUrl = path;
-
                 Db.users.Add(newUser);
-
             }
 
             Db.SaveChanges();

@@ -226,3 +226,8 @@ body {
     letter-spacing: -10px;
     margin-bottom: 0;
 }
+
+.rStyle {
+    color: #e6e6e6;
+    text-decoration: none;
+}

@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Ged_app.Models.user>
 
-@{
+@*@{
     Layout = Layout;
-}
+}*@
 
 <div class="container-fluid">
     <div class="row">
@@ -13,7 +13,7 @@
 
     <p>
         @*@Html.ActionLink("Create New", "Create")*@
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" onclick="clearModal()">
             New User
         </button>
     </p>
@@ -123,9 +123,13 @@
                                     <i class="ti-pencil" title="Edit" onclick="loadUser(@item.idUser)">
                                         @*@Html.ActionLink("Edit", "Edit", new { id = item.idUser }) |*@
                                     </i>
-                                    <i class="ti-trash">
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.idUser })
-                                    </i>
+                                    &emsp;
+                                    &emsp;
+                                    &emsp;
+                                    <a href="User/Delete/@item.idUser">
+                                        <i class="ti-trash" title="Delete">
+                                        </i>
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -141,7 +145,7 @@
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form class="margin-t" method="post" enctype="multipart/form-data">
+            <form class="margin-t form" method="post" enctype="multipart/form-data">
 
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
@@ -162,6 +166,8 @@
                         <div class="container-content">
                             @Html.AntiForgeryToken()
 
+                            <input hidden type="text" id="idElt" class="form-control" name="idUser">
+
                             <div class="form-group">
                                 <input type="text" id="nameElt" class="form-control" placeholder="Name" required="" name="name">
                             </div>
@@ -176,13 +182,13 @@
 
                                 @Html.DropDownList("idGroup", ViewBag.Status as SelectList, new { @class = "form-control" })
 
-                              
+
                             </div>
                             <div class="form-group">
                                 <input type="password" id="pwdElt" class="form-control" placeholder="*****" required="" name="password">
                             </div>
                             <div class="form-group">
-                                <input type="file" id="avatarElt" class="form-control" placeholder="Avatar" name="avatarFile" />
+                                <input type="file" id="avatarElt" value="testwjkelkjw" class="form-control" placeholder="Avatar" name="avatarFile" />
                             </div>
 
                         </div>
@@ -204,6 +210,8 @@
 
 <script type="text/javascript">
 
+    let currentUser = -1;
+
     function loadUser(id) {
         event.preventDefault();
 
@@ -213,7 +221,10 @@
             method: 'GET',
             data: { "idUser": id },
             success: function (response) {
-                console.log(response.idUser);
+                //console.log(response.idUser);
+                //currentUser = response.idUser;
+                document.getElementById("idElt").value = response.idUser;
+                console.log(currentUser);
                 //alert(response.idUser);
                 document.getElementById("nameElt").value = response.name;
                 document.getElementById("surnameElt").value = response.surname;
@@ -223,9 +234,21 @@
                 document.getElementById("avatarElt").value = response.avatarUrl;
             }
         })
-
         $('#exampleModalLong').modal('toggle');
+
     }
+
+    function clearModal() {
+        document.getElementById("nameElt").value = "";
+        document.getElementById("surnameElt").value = "";
+        document.getElementById("emailElt").value = "";
+        //document.getElementById("nameElt").value = response.name;
+        document.getElementById("pwdElt").value = "";
+        document.getElementById("avatarElt").value = "";
+
+    }
+
+
 
     function delEnt() {
 
@@ -248,5 +271,16 @@
         do {
             currentDate = Date.now();
         } while (currentDate - date < milliseconds);
+    }
+
+    let form = document.querySelector(".form");
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        let formData = new FormData(form);
+        formData.append("idUser", parseInt(currentUser));
+        console.log(formData);
+
+        form.submit();
     }
 </script>
