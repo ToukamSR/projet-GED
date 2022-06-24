@@ -27,16 +27,31 @@ namespace Ged_app.Controllers
         }
 
 
-        public ActionResult Logout()
-        {
-            //ViewBag.Status = list;
-            return View();
-        }
-
         public ActionResult Login()
         {
             //ViewBag.Status = list;
+            ViewBag.DisErrMsg = 0;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(user user)
+        {
+            string pwdC = cryptDPW(user.password);
+
+            if (Db.users.Any(u => u.email == user.email && u.password == pwdC))
+            {
+                Response.Cookies["UserIdCookies"].Value = Db.users.Where(u => u.email == user.email && u.password == pwdC).FirstOrDefault().idUser.ToString();
+
+                return Redirect("/Home/Index");
+            }
+            ViewBag.DisErrMsg = 1;
+
+            //ViewBag.ErrorMessage = "Email Or Password are incorrect! Try again."
+            ViewBag.ErrorMessage = "Email or Password are incorrect!";
+            return View();
+            //ViewBag.Status = list;
+          
         }
 
         [WebMethod]
@@ -69,7 +84,7 @@ namespace Ged_app.Controllers
         public RedirectResult Index(user newUser, HttpPostedFileBase avatarFile)
         {
 
-
+            string fileName = null;
             //if (Db.users.Find(newUser.idUser)==null)
             if (Db.users.Any(u => u.idUser == newUser.idUser))
             {
@@ -80,8 +95,8 @@ namespace Ged_app.Controllers
                 {
                     string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
                     avatarFile.SaveAs(path);
-
-                    newUser.avatarUrl = path;
+                    fileName = Path.GetFileName(path);
+                    newUser.avatarUrl = fileName;
                 }
                 DbEntityEntry<user> userEntry = Db.Entry(editedUser);
 
@@ -98,8 +113,8 @@ namespace Ged_app.Controllers
                 {
                     string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
                     avatarFile.SaveAs(path);
-
-                    newUser.avatarUrl = path;
+                    fileName = Path.GetFileName(path);
+                    newUser.avatarUrl = fileName;
                 }
 
                 newUser.password = cryptDPW(newUser.password);
@@ -134,7 +149,7 @@ namespace Ged_app.Controllers
             }
         }
 
-        public ActionResult Index(user newUser)
+        public ActionResult Index()
         {
             ViewBag.Title = "User list";
             List<user> users = Db.users.ToList();

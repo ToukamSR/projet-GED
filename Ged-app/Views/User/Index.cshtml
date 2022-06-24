@@ -126,7 +126,7 @@
                                     &emsp;
                                     &emsp;
                                     &emsp;
-                                    <a href="User/Delete/@item.idUser">
+                                    <a href="Delete/@item.idUser">
                                         <i class="ti-trash" title="Delete">
                                         </i>
                                     </a>
@@ -273,14 +273,14 @@
         } while (currentDate - date < milliseconds);
     }
 
-    let form = document.querySelector(".form");
+    //let form = document.querySelector(".form");
 
-    form.onsubmit = (e) => {
-        e.preventDefault();
-        let formData = new FormData(form);
-        formData.append("idUser", parseInt(currentUser));
-        console.log(formData);
+    //form.onsubmit = (e) => {
+    //    e.preventDefault();
+    //    let formData = new FormData(form);
+    //    formData.append("idUser", parseInt(currentUser));
+    //    console.log(formData);
 
-        form.submit();
-    }
+    //    form.submit();
+    //}
 </script>
