@@ -93,7 +93,7 @@ namespace Ged_app.Controllers
                 user editedUser = Db.users.Find(newUser.idUser);
                 if (avatarFile != null)
                 {
-                    string path = Path.Combine(Server.MapPath("~/App_Data/avatars"), Path.GetFileName(avatarFile.FileName));
+                    string path = Path.Combine(Server.MapPath("~/Content/avatars"), Path.GetFileName(avatarFile.FileName));
                     avatarFile.SaveAs(path);
                     fileName = Path.GetFileName(path);
                     newUser.avatarUrl = fileName;

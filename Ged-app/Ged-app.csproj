@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DirectoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ViewModelBase.cs" />
@@ -175,7 +176,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\avatars\perfectLogo.png" />
+    <Content Include="Content\assets\images\directory.png" />
+    <Content Include="Content\assets\images\user.png" />
+    <Content Include="Content\assets\js\directory.js" />
+    <Content Include="Content\avatars\newWhiteLogo.PNG" />
+    <Content Include="Content\avatars\NewWhiteLogo1.png" />
+    <Content Include="Content\avatars\newWhiteLogo2.png" />
+    <Content Include="Content\avatars\perfectLogo.png" />
+    <Content Include="Content\avatars\slazzer-edit-image.png" />
     <Content Include="Content\assets\css\bootstrap-theme.min.css" />
     <Content Include="Content\assets\css\color\color-1.css" />
     <Content Include="Content\assets\css\color\color-1.min.css" />
@@ -1186,6 +1194,7 @@
     <Content Include="Content\assets\scss\main.scss" />
     <Content Include="Content\assets\scss\menu.scss" />
     <Content Include="Content\assets\scss\responsive.scss" />
+    <Content Include="Content\avatars\newWhiteLogo.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1209,12 +1218,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Directory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\ViewModelBase\" />
   </ItemGroup>
   <ItemGroup>
