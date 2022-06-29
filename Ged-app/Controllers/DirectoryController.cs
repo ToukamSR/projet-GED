@@ -21,9 +21,18 @@ namespace Ged_app.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult Index()
+        public ActionResult Index(int idD = 0)
         {
-            List<directory> directories = Db.directories.Where(dir => dir.isDeletedD == 0).ToList();
+            List<directory> directories = new List<directory>();
+            // del = 0 && idDirRef = null IF INDEX
+            if (idD == 0) {
+                directories = Db.directories.Where(dir => dir.isDeletedD == 0 && dir.Dir_idDirectory == null).ToList();
+            }
+            else
+            {
+                directory dir = Db.directories.Find(idD);
+                directories.Add(dir);
+            }
 
             return View(directories);
 

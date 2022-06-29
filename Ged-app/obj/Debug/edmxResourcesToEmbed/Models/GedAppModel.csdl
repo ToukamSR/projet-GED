@@ -58,6 +58,7 @@
     <Property Name="address" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="descriptionO" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="directories" Relationship="Self.directory_FK_DIRECTOR_ASSOCIATI_OWNERINF" FromRole="ownerinformation" ToRole="directory" />
+    <Property Name="category" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="privilege">
     <Key>

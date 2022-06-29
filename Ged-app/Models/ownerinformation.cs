@@ -25,6 +25,7 @@ namespace Ged_app.Models
         public string interlocutor { get; set; }
         public string address { get; set; }
         public string descriptionO { get; set; }
+        public int category { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<directory> directories { get; set; }

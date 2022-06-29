@@ -7,63 +7,149 @@
 
 
 
-<div class="container-fluid g-5">
-    <div class="row mb-3">
-        <h2>Directories</h2>
-    </div>
 
+<div class="container-fluid">
 
-    <div class="row mb-5">
-        <div class="col-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" >
-                New Directory
-            </button>
+    <!-- Header Starts -->
+    <div class="row">
+        <div class="col-sm-12 p-0">
+            <div class="main-header" style="margin-top: 0px;">
+                <h4>Directories</h4>
+                <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Tables</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="basic-table.html">Basic Table</a>
+                    </li>
+                </ol>
+            </div>
         </div>
     </div>
-    
-
+    <!-- Header end -->
+    <!-- Tables start -->
+    <!-- Row start -->
     <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-4">
-                <div class="card d-flex flex-row align-items-start p-4">
-                    <img src="~/Content/assets/images/directory.png" alt="directory image" width="100" class="mx-2"/>
+        <div class="col-sm-12">
+            <!-- Striped Row Table ends -->
+            <!-- Hover effect table starts                              ICI          -->
+            <div class="card">
+                @if (Model.Count() > 1)
+                {
+                    <div class="card-header">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDir">
+                            New Directory
+                        </button>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Directory Name</th>
+                                            <th>Files</th>
+                                            <th>Subdirectories</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td><img src="~/Content/assets/images/directory.png" alt="directory image" width="40" /></td>
+                                            <td class="h5">@Html.DisplayFor(modelItem => item.DirectoryName)</td>
+                                            <td><i class="ti-file">&emsp; </i> @Html.DisplayFor(modelItem => item.files.Count)</td>
+                                            <td><i class="ti-folder">&emsp; </i> @Html.DisplayFor(modelItem => item.directory1.Count)</td>
+                                            <td style="width:300px;">
+                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title=".icofont-home ">
+                                                    <i class="ti-pencil"></i>
+                                                </button>
+                                                <a href='Url.Action("Delete", "Directory", new { idDirectory = item.idDirectory })' class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title=".icofont-search-alt-2">
+                                                    <i class="ti-trash"></i>
+                                                </a>
 
-                    <div class="d-flex flex-column align-items-start w-100 p-3">
-                        <div class="d-flex align-items-center w-100 justify-content-between">
-                            <h3>@Html.DisplayFor(modelItem => item.DirectoryName)</h3>
-                            <a class="btn btn-default waves-effect" data-toggle="tooltip" data-placement="top" title="" href="#default" role="button" data-original-title=".btn-default">
-                                Open
-                            </a>
-                        </div>
+                                                <button type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Archive" data-original-title=".icofont-bubble-right">
+                                                    <i class="ti-archive"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Lock" data-original-title=".icofont-bubble-left">
+                                                    <i class="ti-lock"></i>
+                                                </button>&emsp;
+                                                <a class="btn btn-default waves-effect" data-toggle="tooltip" data-placement="top" title="" href="#default" role="button" data-original-title=".btn-default">
+                                                    Open
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        }
+                                        }
+                                        else
+                                        {
+                                        <p>test</p>
+                                        }
 
-                        <div class="d-flex">
-                            <div><i class="ti-files"></i> &ensp; @Html.DisplayFor(modelItem => item.files.Count)</div>
-                            <div class="mx-5"><i class="ti-folder"></i> &ensp; @Html.DisplayFor(modelItem => item.directory1.Count)</div>
-                        </div>
-
-                        <div class="d-flex justify-content-end w-100 mt-5">
-                            <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title=".icofont-home ">
-                                <i class="ti-pencil"></i>
-                            </button>
-                            <a href='@Url.Action("Delete", "Directory", new { idDirectory = item.idDirectory })' class="btn btn-success btn-icon waves-effect waves-light mx-3" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title=".icofont-search-alt-2">
-                                <i class="ti-trash"></i>
-                            </a>
-                        
-                            <button type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Archive" data-original-title=".icofont-bubble-right">
-                                <i class="ti-archive"></i>
-                            </button>
-                            <button type="button" class="btn btn-info btn-icon waves-effect waves-light mx-3" data-toggle="tooltip" data-placement="top" title="Lock" data-original-title=".icofont-bubble-left">
-                                <i class="ti-lock"></i>
-                            </button>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            <!-- Hover effect table ends-->
+            <!-- Contextual classes table starts -->
+        </div>
     </div>
-
+    <!-- Row end -->
+    <!-- Tables end -->
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*Directory Modal*@
+<div class="modal fade" id="modalDir" tabindex="-1" role="dialog" aria-labelledby="modalDirTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDirTitle">Add Directory</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input id="DirNameElt" class="form-control" placeholder="Directory Name" required="" name="DirectoryName">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input id="DescrElt" class="form-control" placeholder="Description" required="" name="descriptionD">
+                            </div>
+                        </div>
+                    </form>
+    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

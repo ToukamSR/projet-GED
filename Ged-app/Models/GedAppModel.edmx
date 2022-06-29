@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_gedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_gedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="directory">
           <Key>
             <PropertyRef Name="idDirectory" />
@@ -52,6 +52,7 @@
           <Property Name="interlocutor" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="descriptionO" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="category" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="privilege">
           <Key>
@@ -283,8 +284,7 @@
             <End Role="version" EntitySet="version" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_gedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -346,6 +346,7 @@
           <Property Name="address" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="descriptionO" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="directories" Relationship="Self.directory_FK_DIRECTOR_ASSOCIATI_OWNERINF" FromRole="ownerinformation" ToRole="directory" />
+          <Property Name="category" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="privilege">
           <Key>
@@ -602,6 +603,7 @@
           <EntitySetMapping Name="ownerinformations">
             <EntityTypeMapping TypeName="db_gedModel.ownerinformation">
               <MappingFragment StoreEntitySet="ownerinformation">
+                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="idOwner" ColumnName="idOwner" />
                 <ScalarProperty Name="ownerName" ColumnName="ownerName" />
                 <ScalarProperty Name="interlocutor" ColumnName="interlocutor" />

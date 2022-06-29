@@ -47,6 +47,7 @@
     <Property Name="interlocutor" Type="nvarchar" MaxLength="254" Nullable="false" />
     <Property Name="address" Type="nvarchar" MaxLength="254" Nullable="false" />
     <Property Name="descriptionO" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="category" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="privilege">
     <Key>

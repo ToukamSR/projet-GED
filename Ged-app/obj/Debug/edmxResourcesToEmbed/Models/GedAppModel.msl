@@ -44,6 +44,7 @@
     <EntitySetMapping Name="ownerinformations">
       <EntityTypeMapping TypeName="db_gedModel.ownerinformation">
         <MappingFragment StoreEntitySet="ownerinformation">
+          <ScalarProperty Name="category" ColumnName="category" />
           <ScalarProperty Name="idOwner" ColumnName="idOwner" />
           <ScalarProperty Name="ownerName" ColumnName="ownerName" />
           <ScalarProperty Name="interlocutor" ColumnName="interlocutor" />
