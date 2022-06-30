@@ -173,6 +173,7 @@
     <Compile Include="Models\version.cs">
       <DependentUpon>GedAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyModels\DirFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

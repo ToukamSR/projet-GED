@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ged_app.Models.directory>
+﻿@model IEnumerable<Ged_app.MyModels.DirFile>
 
 @{
     ViewBag.Title = "Index";
@@ -39,118 +39,207 @@
             <!-- Striped Row Table ends -->
             <!-- Hover effect table starts                              ICI          -->
             <div class="card">
-                @if (Model.Count() > 1)
+                @if (ViewBag.isMainDir == "0")
                 {
                     <div class="card-header">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDir">
                             New Directory
                         </button>
                     </div>
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col-sm-12 table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Directory Name</th>
-                                            <th>Files</th>
-                                            <th>Subdirectories</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        foreach (var item in Model)
-                                        {
+                }
+                else
+                {
+                    <div class="card-header">
+                        <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-placement="top" title="" data-original-title=".icofont-home ">
+                            <i class="ti-plus"></i>
+                        </button>
+                        <b>File</b>
+                        &emsp;
+                        <button type="button" class="btn btn-success btn-icon waves-effect waves-light" data-placement="top" title="" data-original-title=".icofont-navigation-menu" data-toggle="modal" data-target="#modalDirSub">
+                            <i class="ti-plus"></i>
+                        </button>
+                        <b>Directory</b>
+                    </div>
+
+                }
+
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Element Name</th>
+                                        <th>Element author</th>
+                                        <th>Number of file</th>
+                                        <th>Number of Dir</th>
+                                        <th>Creation date</th>
+                                        <th style="width:350px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
                                         <tr>
                                             <td><img src="~/Content/assets/images/directory.png" alt="directory image" width="40" /></td>
-                                            <td class="h5">@Html.DisplayFor(modelItem => item.DirectoryName)</td>
-                                            <td><i class="ti-file">&emsp; </i> @Html.DisplayFor(modelItem => item.files.Count)</td>
-                                            <td><i class="ti-folder">&emsp; </i> @Html.DisplayFor(modelItem => item.directory1.Count)</td>
-                                            <td style="width:300px;">
-                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title=".icofont-home ">
+                                            <td class="h5">@item.name</td>
+                                            <td class="h5">@item.author</td>
+                                            <td><i class="ti-file">&emsp; </i> @item.nbrFile</td>
+                                            <td><i class="ti-folder">&emsp; </i> @item.nbrDir</td>
+                                            <td class="h5">@item.creationDate</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" @*data-toolip="tooltip"*@ data-toggle="modal" data-placement="top" title="Details" data-original-title="Details" data-target="#modalDirEdit">
+                                                    <i class="ti-more-alt"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light" @*data-toolip="tooltip"*@ data-toggle="modal" data-placement="top" title="Edit" data-original-title="Edit" data-target="#modalDirEdit">
                                                     <i class="ti-pencil"></i>
                                                 </button>
-                                                <a href='Url.Action("Delete", "Directory", new { idDirectory = item.idDirectory })' class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title=".icofont-search-alt-2">
+                                                <a href='Url.Action("Delete", "Directory", new { idDirectory = item.idDirectory })' class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete">
                                                     <i class="ti-trash"></i>
                                                 </a>
 
-                                                <button type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Archive" data-original-title=".icofont-bubble-right">
+                                                <button type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Archive" data-original-title="Archive">
                                                     <i class="ti-archive"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Lock" data-original-title=".icofont-bubble-left">
+                                                <button type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Lock" data-original-title="Lock">
                                                     <i class="ti-lock"></i>
                                                 </button>&emsp;
-                                                <a class="btn btn-default waves-effect" data-toggle="tooltip" data-placement="top" title="" href="#default" role="button" data-original-title=".btn-default">
+                                                <a class="btn btn-default waves-effect" href="@Url.Action("Index", "Directory", new { idD = item.id })" role="button">
                                                     Open
                                                 </a>
                                             </td>
                                         </tr>
-                                        }
-                                        }
-                                        else
-                                        {
-                                        <p>test</p>
-                                        }
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            <!-- Hover effect table ends-->
-            <!-- Contextual classes table starts -->
+            </div>
+
+
+
+            @*DirectoryRoot-Modal*@
+            <div class="modal fade" id="modalDir" tabindex="-1" role="dialog" aria-labelledby="modalDirTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title=".icofont-navigation-menu">
+                                    <i class="ti-plus"></i>
+                                </button>
+                                <h5 class="modal-title" id="modalDirTitle">Add Directory</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <input id="DirNameElt" class="form-control" placeholder="Directory Name" required="" name="DirectoryName">
+                                    </div>
+                                    <div class="form-group col">
+                                        <textarea id="DescrElt" class="form-control" placeholder="Description: Project managers , contacts... " required="" name="descriptionD"></textarea>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label><b>Owner Information</b></label>
+                                        <div class="form-group col">
+                                            <input id="OwnerNameElt" class="form-control" placeholder="Owner Name" required="" name="ownerName">
+                                        </div>
+                                        <label> Category </label>
+                                        <div class="form-group col">
+                                            @*enumeration*@
+                                        </div>
+                                        <div class="form-group col">
+                                            <input id="InterlocElt" class="form-control" placeholder="Interlocutor Name" required="" name="interlocutor">
+                                        </div>
+                                        <div class="form-group col">
+                                            <input id="addressElt" class="form-control" placeholder="Address" required="" name="address">
+                                        </div>
+                                        <div class="form-group col">
+                                            <textarea id="DescrOElt" class="form-control" placeholder="Description : Project managers , contacts..." required="" name="descriptionO"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            @*SubDirectory-Modal*@
+            <div class="modal fade" id="modalDirSub" tabindex="-1" role="dialog" aria-labelledby="modalDirSubTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title=".icofont-navigation-menu">
+                                    <i class="ti-plus"></i>
+                                </button>
+                                <h5 class="modal-title" id="modalDirSubTitle">Add Directory</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <input id="DirNameElt" class="form-control" placeholder="Directory Name" required="" name="DirectoryName">
+                                    </div>
+                                    <div class="form-group col">
+                                        <textarea id="DescrElt" class="form-control" placeholder="Description" required="" name="descriptionD"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <!-- Row end -->
-    <!-- Tables end -->
 </div>
 
+@*Edit Directory Modal*@
 
+@*<div class="modal fade" id="modalDirEdit" tabindex="-1" role="dialog" aria-labelledby="modalDirEditTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form method="post" action='@Url.Action("Edit", "Directory")'>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDirEditTitle">New Directory Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="col">
+                                    <input id="DirIdElt" class="form-control" placeholder="Name" required="" name="idDirectory" value="@item.idDirectory">
+                                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-@*Directory Modal*@
-<div class="modal fade" id="modalDir" tabindex="-1" role="dialog" aria-labelledby="modalDirTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalDirTitle">Add Directory</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input id="DirNameElt" class="form-control" placeholder="Directory Name" required="" name="DirectoryName">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input id="DescrElt" class="form-control" placeholder="Description" required="" name="descriptionD">
+                                <div class="col">
+                                    <input id="DirNameElt" class="form-control" placeholder="Name" required="" name="DirectoryName">
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
                     </form>
-    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-
+    }*@
